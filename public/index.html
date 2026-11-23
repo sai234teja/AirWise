@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AirWise: Smog-smart daily plans for families</title>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#0b6b4b"><meta name="description" content="Live air quality plus a GenAI-powered low-emission routine for your family.">
+<style>
+:root{--bg:#f6f8f7;--fg:#14211b;--card:#fff;--ac:#0b6b4b;--bd:#b9c7bf}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1512;--fg:#e8f1ec;--card:#16211c;--ac:#6fe0b0;--bd:#3a4b42}}
+*{box-sizing:border-box}body{margin:0;font:1rem/1.6 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+main{max-width:46rem;margin:0 auto;padding:1.5rem}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--card);padding:.5rem}
+form,section{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1rem;margin:1rem 0}
+label,legend{font-weight:600}input,select,button{font:inherit;padding:.6rem;margin:.3rem 0;border:2px solid var(--bd);border-radius:8px;background:var(--card);color:var(--fg);min-height:44px}
+button{background:var(--ac);color:var(--bg);border-color:var(--ac);font-weight:700;cursor:pointer}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}.chk label{font-weight:400;margin-right:1rem}
+.aqi{font-size:2.5rem;font-weight:800}
+</style></head><body><a class="skip" href="#result">Skip to results</a>
+<main><label for="lang">Language / भाषा / భాష</label> <select id="lang"><option value="en">English</option><option value="hi">हिन्दी</option><option value="te">తెలుగు</option></select>
+<h1>AirWise</h1><p data-i18n="sub"></p>
+<form id="f"><label for="city" data-i18n="city"></label><br><input id="city" name="city" required minlength="2" maxlength="60" autocomplete="address-level2" placeholder="Delhi"><br>
+<fieldset class="chk"><legend data-i18n="who"></legend>
+<label><input type="checkbox" name="household" value="children"> <span data-i18n="children"></span></label><label><input type="checkbox" name="household" value="elderly"> <span data-i18n="elderly"></span></label>
+<label><input type="checkbox" name="household" value="asthma"> <span data-i18n="asthma"></span></label><label><input type="checkbox" name="household" value="pregnant"> <span data-i18n="pregnant"></span></label></fieldset>
+<label for="commute" data-i18n="commute"></label><br><select id="commute"><option value="car" data-i18n="car"></option><option value="bike" data-i18n="bike"></option><option value="bus" data-i18n="bus"></option><option value="metro" data-i18n="metro"></option><option value="walk" data-i18n="walk"></option></select><br>
+<label for="km" data-i18n="km"></label><br><input id="km" type="number" min="0" max="200" value="10"><br>
+<button type="submit" data-i18n="go"></button></form>
+<div id="result" role="status" aria-live="polite" tabindex="-1"></div>
+<p><small data-i18n="note"></small></p></main>
+<script>
+const $=(s)=>document.querySelector(s),out=$('#result');
+const el=(t,txt,p)=>{const e=document.createElement(t);e.textContent=txt;p&&p.append(e);return e};
+const U={en:{sub:'Tell us where you live and who is at home. Get a smog-smart plan with the real impact of each choice.',city:'City',who:'Who is at home?',children:'Children',elderly:'Elderly',asthma:'Asthma',pregnant:'Pregnant',commute:'Usual commute',km:'One-way distance (km)',go:'Get my plan',car:'Car',bike:'Bike',bus:'Bus',metro:'Metro',walk:'Walk',loading:'Checking the air...',h1:"Today's routine",h2:'Indoor air hacks',h3:'Sustainable alternatives',h4:'Your impact',note:'General guidance only, not medical advice. Air data: Open-Meteo. AI text: Google Gemini.'},
+hi:{sub:'बताइए आप कहाँ रहते हैं और घर में कौन है। हर चुनाव के असली असर के साथ स्मॉग-स्मार्ट योजना पाइए।',city:'शहर',who:'घर में कौन है?',children:'बच्चे',elderly:'बुज़ुर्ग',asthma:'अस्थमा',pregnant:'गर्भवती',commute:'सामान्य यात्रा',km:'एक तरफ़ की दूरी (किमी)',go:'मेरी योजना दिखाएँ',car:'कार',bike:'बाइक',bus:'बस',metro:'मेट्रो',walk:'पैदल',loading:'हवा की जाँच हो रही है...',h1:'आज की दिनचर्या',h2:'घर के अंदर की हवा के उपाय',h3:'टिकाऊ विकल्प',h4:'आपका असर',note:'सामान्य जानकारी, चिकित्सकीय सलाह नहीं। हवा का डेटा: Open-Meteo। AI पाठ: Google Gemini।'},
+te:{sub:'మీరు ఎక్కడ ఉంటారో, ఇంట్లో ఎవరున్నారో చెప్పండి. ప్రతి ఎంపిక అసలు ప్రభావంతో స్మాగ్-స్మార్ట్ ప్లాన్ పొందండి.',city:'నగరం',who:'ఇంట్లో ఎవరు ఉన్నారు?',children:'పిల్లలు',elderly:'వృద్ధులు',asthma:'ఆస్తమా',pregnant:'గర్భిణి',commute:'సాధారణ ప్రయాణం',km:'ఒకవైపు దూరం (కి.మీ)',go:'నా ప్లాన్ చూపించు',car:'కారు',bike:'బైక్',bus:'బస్సు',metro:'మెట్రో',walk:'నడక',loading:'గాలిని పరిశీలిస్తున్నాం...',h1:'ఈ రోజు దినచర్య',h2:'ఇంటి లోపల గాలి చిట్కాలు',h3:'స్థిరమైన ప్రత్యామ్నాయాలు',h4:'మీ ప్రభావం',note:'సాధారణ సూచనలు మాత్రమే, వైద్య సలహా కాదు. గాలి డేటా: Open-Meteo. AI వచనం: Google Gemini.'}};
+const L=()=>$('#lang').value,T=(k)=>U[L()][k];
+function applyLang(){document.documentElement.lang=L();document.querySelectorAll('[data-i18n]').forEach(n=>{n.textContent=T(n.dataset.i18n)})}
+$('#lang').addEventListener('change',applyLang);
+const sl=(navigator.language||'en').slice(0,2);if(U[sl])$('#lang').value=sl;applyLang();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+function list(title,items){const s=document.createElement('section');el('h2',title,s);const u=el('ul','',s);items.forEach(i=>el('li',i,u));out.append(s)}
+$('#f').addEventListener('submit',async(e)=>{e.preventDefault();out.replaceChildren(el('p',T('loading')));
+ const body={city:$('#city').value,commute:$('#commute').value,km:$('#km').value,lang:L(),household:[...document.querySelectorAll('[name=household]:checked')].map(c=>c.value)};
+ try{const r=await fetch('/api/advice',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});const d=await r.json();
+  if(!r.ok)throw new Error(d.error);out.replaceChildren();
+  const h=document.createElement('section');el('h2',d.place,h);el('p','AQI '+d.aqi,h).className='aqi';el('p',d.category,h);d.summary&&el('p',d.summary,h);out.append(h);
+  list(T('h1'),d.routine);list(T('h2'),d.indoor);list(T('h3'),d.alternatives);list(T('h4'),[d.impact]);out.focus();
+ }catch(err){out.replaceChildren(el('p','Sorry: '+err.message))}});
+</script></body></html>
